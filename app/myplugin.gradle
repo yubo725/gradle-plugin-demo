@@ -1,0 +1,19 @@
+class MyPluginExtension {
+    String message = "Hello this is my custom plugin..."
+}
+
+class GreetingPlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project project) {
+        def extension = project.extensions.create('greeting', MyPluginExtension)
+
+        project.task('hello') {
+            doLast {
+                println extension.message
+            }
+        }
+    }
+}
+
+apply plugin: GreetingPlugin
